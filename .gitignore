@@ -28,6 +28,7 @@
 .packages
 .pub-cache/
 .pub/
+**/*.g.dart
 /build/
 
 # Web related
