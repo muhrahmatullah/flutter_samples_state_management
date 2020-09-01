@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:state_management_sample/model/nba_team_response.dart';
+import 'package:state_management_sample/service/net_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,11 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MultiProvider(providers: [Provider<NbaTeamService>.value(value: NbaTeamService())], child: MyHomePage(title: 'Nba Team')),
     );
   }
 }
@@ -28,11 +32,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  NbaTeamResponse response = NbaTeamResponse();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      final res = await Provider.of<NbaTeamService>(context, listen: false).fetchTeams(1, 10);
+      setState(() {
+        response = res;
+      });
     });
   }
 
@@ -42,25 +51,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      body: response == null
+          ? Center(child: Text('Network request failed'))
+          : response.data == null
+              ? Center(child: CircularProgressIndicator())
+              : Container(
+                  child: ListView.builder(
+                    itemBuilder: (ctx, idx) => Text(response.data[idx].fullName),
+                    itemCount: response.data.length,
+                  ),
+                ),
     );
   }
 }
