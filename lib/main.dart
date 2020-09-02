@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management_sample/model/nba_team_response.dart';
 import 'package:state_management_sample/service/net_service.dart';
+import 'package:state_management_sample/ui/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MultiProvider(providers: [Provider<NbaTeamService>.value(value: NbaTeamService())], child: MyHomePage(title: 'Nba Team')),
+      home: MultiProvider(providers: [Provider<NbaTeamService>.value(value: NbaTeamService())], child: HomeScreen()),
     );
   }
 }

@@ -8,7 +8,7 @@ class MetaInfo {
 
   MetaInfo(this.totalPage, this.currentPage, this.nextPage, this.perPage, this.count);
 
-  @JsonKey(name: 'total_page')
+  @JsonKey(name: 'total_pages')
   final int totalPage;
   @JsonKey(name: 'current_page')
   final int currentPage;
