@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> fetchNbaTeams(int p, BuildContext context) async {
-    final res = await Provider.of<NbaTeamService>(context, listen: false).fetchTeams(p, 10);
+    final res = await Provider.of<NbaTeamService>(context, listen: false).fetchTeams(p, perPage: 10);
     setState(() {
       if(page > 1) {
         response.data.addAll(res.data);

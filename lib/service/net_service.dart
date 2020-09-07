@@ -5,7 +5,7 @@ import 'package:state_management_sample/model/nba_team_response.dart';
 
 class NbaTeamService {
 
-  Future<NbaTeamResponse> fetchTeams(int page, int perPage) async{
+  Future<NbaTeamResponse> fetchTeams(int page, {int perPage = 10}) async{
     var response;
     try {
       response = await get('https://www.balldontlie.io/api/v1/teams?page=$page&per_page=$perPage', );
