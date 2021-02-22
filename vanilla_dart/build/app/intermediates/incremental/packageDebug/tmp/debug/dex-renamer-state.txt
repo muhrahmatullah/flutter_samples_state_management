@@ -1,4 +1,0 @@
-#Mon Sep 07 23:51:08 WITA 2020
-base.0=/Users/muh.rahmatullah/fltrpro/state_management_sample/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
