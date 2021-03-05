@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreenV2> {
   @override
   void initState() {
     super.initState();
-    Future(() async {
+    Future.microtask(() async {
       await Provider.of<HomeViewModel>(context, listen: false).fetchTeams(1);
     });
   }

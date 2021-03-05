@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Future(() async {
+    Future.microtask(() async {
       await Provider.of<HomeViewModel>(context, listen: false).fetchTeams(1);
     });
   }
@@ -30,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Flutter Arch Comp Demo'),
       ),
       body: Container(
-        child: viewModel.teams.data != null
+        child: viewModel.list != null
             ? ListView.builder(
-                  itemBuilder: (ctx, idx) => NbaItemView(data: viewModel.teams.data.data[idx]),
-                  itemCount: viewModel.teams.data.data.length,
+                  itemBuilder: (ctx, idx) => NbaItemView(data: viewModel.list[idx]),
+                  itemCount: viewModel.list.length,
                 )
             : viewModel.teams.error
                 ? Center(child: const Text('Error Happened'))
