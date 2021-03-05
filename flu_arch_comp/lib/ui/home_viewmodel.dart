@@ -1,8 +1,7 @@
 import 'package:flu_arch_comp/data/repository.dart';
 import 'package:flu_arch_comp/data/response_wrapper.dart';
-import 'package:flu_arch_comp/model/nba_response.dart';
 import 'package:flu_arch_comp/model/team.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeViewModel extends ChangeNotifier {
 
@@ -10,9 +9,9 @@ class HomeViewModel extends ChangeNotifier {
 
   final Repository _repository;
 
-  ResponseWrapper<NbaTeamResponse> teams = ResponseWrapper.loading();
+  ResponseWrapper<List<NbaTeam>> teams = ResponseWrapper.loading();
 
-  List<NbaTeam> get list => teams?.data?.data;
+  List<NbaTeam> get list => teams?.data;
 
   Future<void> fetchTeams(int page) async {
     teams = await _repository.fetchTeams(page);
