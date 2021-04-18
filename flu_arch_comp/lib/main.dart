@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
       home: MultiProvider(
         providers: [
           ChangeNotifierProvider<HomeViewModel>(
-            create: (context) => HomeViewModel(Repository(AppClientService(Dio()), AppDatabase())),
+            create: (context) => HomeViewModel(Repository(AppClientService(Dio())
+                , AppDatabase())),
           )
         ],
         child: HomeScreenV2(),

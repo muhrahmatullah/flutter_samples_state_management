@@ -22,18 +22,22 @@ class Repository {
       }
     }
 
-    final result = data
-        .map((item) => NbaTeam(
-              item.id,
-              item.abbreviation,
-              item.city,
-              item.conference,
-              item.division,
-              item.fullName,
-              item.name,
-            ))
-        .toList();
-
-    return ResponseWrapper.success(data: result);
+    return ResponseWrapper.success(data: mapToNbaTeams(data));
   }
+
+
+  List<NbaTeam> mapToNbaTeams(List<NbaTeamDataData> data) {
+    return data
+        .map((item) => NbaTeam(
+      item.id,
+      item.abbreviation,
+      item.city,
+      item.conference,
+      item.division,
+      item.fullName,
+      item.name,
+    ))
+        .toList();
+  }
+
 }
