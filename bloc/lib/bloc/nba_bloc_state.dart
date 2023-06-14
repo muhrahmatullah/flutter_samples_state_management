@@ -1,28 +1,37 @@
 import 'package:equatable/equatable.dart';
 import 'package:state_management_sample/model/team.dart';
 
-abstract class NbaBlocState extends Equatable {
-  const NbaBlocState();
-
-  @override
-  List<Object?> get props => [];
+enum ScreenStatus {
+  loading,
+  data,
+  error,
 }
 
-class Loading extends NbaBlocState {}
+class NbaBlocState extends Equatable {
+  const NbaBlocState({
+    this.data = const <NbaTeam>[],
+    this.hasNext = true,
+    this.status = ScreenStatus.loading,
+    this.page = 1,
+  });
 
-class Error extends NbaBlocState {}
+  final List<NbaTeam> data;
 
-class Succes extends NbaBlocState {
-  const Succes(this.data);
+  final bool hasNext;
 
-  final List<NbaTeam>? data;
+  final ScreenStatus status;
 
-  Succes copyWith({List<NbaTeam>? data}) {
-    return Succes(data ?? this.data);
+  final int page;
+
+  NbaBlocState copyWith({List<NbaTeam>? data, bool? hasNext, ScreenStatus? status, int? page}) {
+    return NbaBlocState(
+      data: data ?? this.data,
+      hasNext: hasNext ?? this.hasNext,
+      status: status ?? this.status,
+      page: page ?? this.page,
+    );
   }
 
-
   @override
-  List<Object?> get props => [data];
-
+  List<Object?> get props => [data, hasNext];
 }

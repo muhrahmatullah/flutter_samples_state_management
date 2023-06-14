@@ -10,3 +10,5 @@ abstract class NbaBlocEvent extends Equatable {
 class FetchDataEvent extends NbaBlocEvent {
 
 }
+
+class FetchMoreDataEvent extends NbaBlocEvent {}

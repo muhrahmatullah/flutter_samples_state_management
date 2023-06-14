@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
         home: BlocProvider(
           create: (context) =>
-              NbaBloc(service: NbaTeamService()),
+              NbaBloc(service: NbaTeamService())..add(FetchDataEvent()),
           child: HomeScreen(),
         ));
   }
